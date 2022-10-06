@@ -17,9 +17,10 @@ int main(int argc, char *argv[])
 
   char hostname[1024];
   strcpy(hostname, "server.ashar.cs164");
+  printf("Hostname, %s\n", hostname);
   struct  hostent  *ptrh;
   ptrh = gethostbyname(hostname);
-
+  printf("Host Ip address, %s\n", ptrh->h_addr);
  
   memset(recvBuff, '0' ,sizeof(recvBuff));
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0)
