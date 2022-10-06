@@ -38,6 +38,7 @@ int main(void)
   memset(recvBuff, '0' ,sizeof(recvBuff));
   char msgHi[1024];
   strcpy(msgHi, "Hi");
+  int n = 0;
   while(1)
     {
       
