@@ -14,13 +14,12 @@ int main(int argc, char *argv[])
   int sockfd = 0,n = 0;
   char recvBuff[1024];
   struct sockaddr_in serv_addr;
-
-  char hostname[1024];
-  strcpy(hostname, "server.ashar.cs164");
-  printf("Hostname, %s\n", hostname);
+  char *host;
+  host = argv[1];
+  printf("\nHostname, %s", host);
   struct  hostent  *ptrh;
-  ptrh = gethostbyname(hostname);
- 
+  ptrh = gethostbyname(host);
+  printf("\nHere1");
   memset(recvBuff, '0' ,sizeof(recvBuff));
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0)
     {
@@ -38,10 +37,8 @@ int main(int argc, char *argv[])
       return 1;
     }
 	
-	if( argc == 2 ) {
-      printf("Client says, %s\n", argv[1]);
-  }
-	
+  printf("Client says, %s\n", argv[2]);
+  
   while((n = read(sockfd, recvBuff, sizeof(recvBuff)-1)) > 0)
     {
       recvBuff[n] = 0;
