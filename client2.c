@@ -20,7 +20,6 @@ int main(int argc, char *argv[])
   printf("Hostname, %s\n", hostname);
   struct  hostent  *ptrh;
   ptrh = gethostbyname(hostname);
-  printf("Host Ip address, %s\n", ptrh->h_addr);
  
   memset(recvBuff, '0' ,sizeof(recvBuff));
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0)
@@ -29,15 +28,9 @@ int main(int argc, char *argv[])
       return 1;
     }
 
-  
-
-  if( argc == 2 ) {
-      printf("Client says, %s\n", argv[1]);
-  }
- 
   serv_addr.sin_family = AF_INET;
   serv_addr.sin_port = htons(5000);
-  serv_addr.sin_addr.s_addr = inet_addr(ptrh->h_addr);
+  memcpy(&serv_addr.sin_addr, ptrh->h_addr, ptrh->h_length);
  
   if(connect(sockfd, (struct sockaddr *)&serv_addr, sizeof(serv_addr))<0)
     {
@@ -45,7 +38,9 @@ int main(int argc, char *argv[])
       return 1;
     }
 	
-	
+	if( argc == 2 ) {
+      printf("Client says, %s\n", argv[1]);
+  }
 	
   while((n = read(sockfd, recvBuff, sizeof(recvBuff)-1)) > 0)
     {
