@@ -40,7 +40,7 @@ int main(int argc, char *argv[])
   char sendBuff[1025]; 
   memset(sendBuff, '0', sizeof(sendBuff));
   strcpy(sendBuff, argv[2]);
-  write(sockfd, sendBuff, strlen(sendBuff));
+  send(sockfd, sendBuff, strlen(sendBuff));
   
   while((n = read(sockfd, recvBuff, sizeof(recvBuff)-1)) > 0)
     {

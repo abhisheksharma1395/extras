@@ -43,15 +43,7 @@ int main(void)
     {
       
         connfd = accept(listenfd, (struct sockaddr*)NULL ,NULL); // accept awaiting request
-        while((n = read(listenfd, recvBuff, sizeof(recvBuff)-1)) > 0)
-        {
-        recvBuff[n] = 0;
-        if(fputs(recvBuff, stdout) == EOF)
-        {
-        printf("\n Error : Fputs error");
-        }
-        printf("\n");
-        }
+        int valread = read(connfd, recvBuff,sizeof(recvBuff)-1));
         printf("Received %s from client\n", recvBuff);
 
         int res = strcmp(msgHi, recvBuff);
@@ -65,7 +57,6 @@ int main(void)
         close(connfd);    
         sleep(1);
     }
- 
  
   return 0;
 }
