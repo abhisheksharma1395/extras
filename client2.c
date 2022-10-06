@@ -38,6 +38,9 @@ int main(int argc, char *argv[])
     }
 	
   printf("Client says, %s\n", argv[2]);
+
+  strcpy(sendBuff, argv[2]);
+  write(sockfd, sendBuff, strlen(sendBuff));
   
   while((n = read(sockfd, recvBuff, sizeof(recvBuff)-1)) > 0)
     {
