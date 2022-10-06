@@ -42,16 +42,18 @@ int main(void)
     {
       
         connfd = accept(listenfd, (struct sockaddr*)NULL ,NULL); // accept awaiting request
-  
-        char recv[1024];
-        memset(recv, 0, sizeof(recv));
-        if (read(listenfd, recv, sizeof(recv)) < 0) {
-            perror("cannot read");
-            exit(4);
+        while((n = read(listenfd, recvBuff, sizeof(recvBuff)-1)) > 0)
+        {
+        recvBuff[n] = 0;
+        if(fputs(recvBuff, stdout) == EOF)
+        {
+        printf("\n Error : Fputs error");
         }
-        printf("Received %s from client\n", recv);
+        printf("\n");
+        }
+        printf("Received %s from client\n", recvBuff);
 
-        int res = strcmp(msgHi, recv);
+        int res = strcmp(msgHi, recvBuff);
         if (res == 0) {
             strcpy(sendBuff, "Hi");
         } else {

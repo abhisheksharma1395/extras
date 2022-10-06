@@ -19,7 +19,6 @@ int main(int argc, char *argv[])
   printf("\nHostname, %s", host);
   struct  hostent  *ptrh;
   ptrh = gethostbyname(host);
-  printf("\nHere1");
   memset(recvBuff, '0' ,sizeof(recvBuff));
   if((sockfd = socket(AF_INET, SOCK_STREAM, 0))< 0)
     {
