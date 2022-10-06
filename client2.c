@@ -38,7 +38,8 @@ int main(int argc, char *argv[])
     }
 	
   printf("Client says, %s\n", argv[2]);
-
+  char sendBuff[1025]; 
+  memset(sendBuff, '0', sizeof(sendBuff));
   strcpy(sendBuff, argv[2]);
   write(sockfd, sendBuff, strlen(sendBuff));
   
